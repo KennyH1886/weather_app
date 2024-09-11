@@ -1,0 +1,96 @@
+/* Set a normal height for the weather container without taking up the full screen */
+.weather {
+    place-self: center;
+    padding: 40px;
+    border-radius: 10px;
+    background-image: linear-gradient(45deg, red, purple); /* Keep the gradient */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically within the container */
+    color: white; /* Text color */
+    max-width: 600px; /* Set a max width to limit the container size */
+    margin: 50px auto; /* Add space at the top and center horizontally */
+}
+
+/* Style for the search bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Input inside the search bar */
+.search-bar input {
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    padding-left: 25px;
+    color: #626262;
+    background: #ebfffc;
+    font-size: 18px;
+}
+
+/* Search icon styling */
+.search-bar img {
+    width: 50px;
+    padding: 15px;
+    border-radius: 50%;
+    background: #ebfffc;
+}
+
+/* Weather icon (condition image) */
+.weather-icon {
+    width: 150px;
+    margin: 30px 0;
+}
+
+/* Temperature styling */
+.temperature {
+    color: #fff;
+    font-size: 80px;
+    line-height: 1;
+}
+
+/* Location styling */
+.location {
+    color: #fff;
+    font-size: 40px;
+}
+
+/* Weather data display */
+.weather-data {
+    width: 100%;
+    margin-top: 40px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between; 
+}
+
+/* Weather data column style */
+.weather-data .col {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 22px;
+}
+
+/* Weather data sub-text (e.g., humidity, wind speed) */
+.weather-data .col span {
+    display: block;
+    font-size: 16px;
+}
+
+/* Weather data icons */
+.weather-data .col img {
+    width: 26px;
+    margin-top: 10px; 
+}
+
+/* Remove full-page background if no longer needed */
+body {
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4; /* Optional: Set a neutral background outside the weather container */
+}
