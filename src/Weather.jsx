@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import './Weather.css'
 const search_icon = '/assets/search.png';
 const clear_icon = '/assets/clear.png';
@@ -9,40 +9,40 @@ const snow_icon = '/assets/snow.png';
 const wind_icon = '/assets/wind.png';
 const humidity_icon = '/assets/humidity.png';
 
+const allIcons = {
+    "01d": clear_icon,
+    "01n": clear_icon,
+    "02d": cloud_icon,
+    "02n": cloud_icon,
+    "03d": cloud_icon,
+    "03n": drizzle_icon,
+    "04d": drizzle_icon,
+    "04n": rain_icon,
+    "09d": rain_icon,
+    "09n": rain_icon,
+    "10d": rain_icon,
+    "10n": rain_icon,
+    "11d": rain_icon,  // Add this for thunderstorm (day)
+    "11n": rain_icon,  // Add this for thunderstorm (night)
+    "13d": snow_icon,
+    "13n": snow_icon,
+    "50d": cloud_icon, // Add this for mist (day)
+    "50n": cloud_icon  // Add this for mist (night)
+};
 
 const Weather = () => {
     const inputRef = useRef()
     const [weatherData, setWeatherData ] = useState(false);
 
-    const allIcons = {
-        "01d": clear_icon,
-        "01n": clear_icon,
-        "02d": cloud_icon,
-        "02n": cloud_icon,
-        "03d": cloud_icon,
-        "03n": drizzle_icon,
-        "04d": drizzle_icon,
-        "04n": rain_icon,
-        "09d": rain_icon,
-        "09n": rain_icon,
-        "10d": rain_icon,
-        "10n": rain_icon,
-        "11d": rain_icon,  // Add this for thunderstorm (day)
-        "11n": rain_icon,  // Add this for thunderstorm (night)
-        "13d": snow_icon,
-        "13n": snow_icon,
-        "50d": cloud_icon, // Add this for mist (day)
-        "50n": cloud_icon  // Add this for mist (night)
-    };
 
-    const search = async(city) => {
+
+    const search = useCallback(async (city) => {
         if (city === "") {
             alert("Enter City Name");
             return;
         }
         try {
-            // Hardcode your API key here for testing purposes
-            const apiKey = "20d23e9b577294e5bc4f5cf5f9515d79";  // Replace with your actual API key
+            const apiKey = "20d23e9b577294e5bc4f5cf5f9515d79";
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
             
             const response = await fetch(url);
@@ -53,10 +53,7 @@ const Weather = () => {
                 return;
             }
     
-            console.log(data);
-            console.log("Icon code:", data.weather[0].icon);  // Log icon code to check
-    
-            const icon = allIcons[data.weather[0].icon] || clear_icon;  // Fallback to clear_icon if no match
+            const icon = allIcons[data.weather[0].icon] || clear_icon;
             
             setWeatherData({
                 humidity: data.main.humidity,
@@ -69,9 +66,11 @@ const Weather = () => {
             setWeatherData(false);
             console.error("Error in fetching weather data", error);
         }
-    }
+    }, []); // useCallback ensures `search` is not redefined on every render
 
-    useEffect(() => { search("New York") }, []);
+    useEffect(() => {
+        search("New York");
+    }, [search]); // `search` is now a stable dependency
 
     return (
         <div className='weather'>
