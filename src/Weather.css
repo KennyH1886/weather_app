@@ -12,6 +12,22 @@
     max-width: 600px; /* Set a max width to limit the container size */
     margin: 50px auto; /* Add space at the top and center horizontally */
 }
+.toggle-btn {
+    background-color: #ff6600;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.toggle-btn:hover {
+    background-color: #ff4500;
+}
 
 /* Style for the search bar */
 .search-bar {
