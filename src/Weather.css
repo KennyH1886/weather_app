@@ -74,6 +74,9 @@
     color: #fff;
     font-size: 40px;
 }
+.humidity, .wind-speed {
+    margin-right: 10px; /* Adds space between the elements */
+}
 
 /* Weather data display */
 .weather-data {
