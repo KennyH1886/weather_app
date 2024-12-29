@@ -10,31 +10,64 @@ const wind_icon = '/assets/wind.png';
 const humidity_icon = '/assets/humidity.png';
 
 const allIcons = {
-    "01d": clear_icon,
-    "01n": clear_icon,
-    "02d": cloud_icon,
-    "02n": cloud_icon,
-    "03d": cloud_icon,
-    "03n": drizzle_icon,
-    "04d": drizzle_icon,
-    "04n": rain_icon,
-    "09d": rain_icon,
-    "09n": rain_icon,
-    "10d": rain_icon,
-    "10n": rain_icon,
-    "11d": rain_icon,  // Add this for thunderstorm (day)
-    "11n": rain_icon,  // Add this for thunderstorm (night)
-    "13d": snow_icon,
-    "13n": snow_icon,
-    "50d": cloud_icon, // Add this for mist (day)
-    "50n": cloud_icon  // Add this for mist (night)
+      // Clear sky
+      "01d": clear_icon,
+      "01n": clear_icon,
+      
+      // Few clouds
+      "02d": cloud_icon,
+      "02n": cloud_icon,
+      
+      // Scattered clouds
+      "03d": cloud_icon,
+      "03n": cloud_icon,
+      
+      // Broken clouds
+      "04d": cloud_icon,
+      "04n": cloud_icon,
+      
+      // Shower rain
+      "09d": rain_icon,
+      "09n": rain_icon,
+      
+      // Rain
+      "10d": rain_icon,
+      "10n": rain_icon,
+      
+      // Thunderstorm
+      "11d": rain_icon,
+      "11n": rain_icon,
+      
+      // Snow
+      "13d": snow_icon,
+      "13n": snow_icon,
+      
+      // Mist, smoke, haze, fog
+      "50d": cloud_icon,
+      "50n": cloud_icon,
+      
+      // Additional conditions
+      // Dust, sand, ash
+      "51d": cloud_icon,
+      "51n": cloud_icon,
+      
+      // Squalls
+      "52d": rain_icon,
+      "52n": rain_icon,
+      
+      // Tornado
+      "53d": cloud_icon,
+      "53n": cloud_icon
 };
 
 const Weather = () => {
     const inputRef = useRef()
     const [weatherData, setWeatherData ] = useState(false);
+    const [isCelsius, setIsCelsius] = useState(true);
 
-
+    const convertToFahrenheit = (celsius) => {
+        return Math.floor((celsius * 9/5) + 32);
+    }
 
     const search = useCallback(async (city) => {
         if (city === "") {
@@ -80,7 +113,13 @@ const Weather = () => {
             </div>
             {weatherData ? <>
                 <img src={weatherData.icon} alt="weather icon" className='weather-icon'/>
-                <p className='temperature'>{weatherData.temperature}°C</p>
+                <p className='temperature'>
+                    {isCelsius ? weatherData.temperature : convertToFahrenheit(weatherData.temperature)}
+                    °{isCelsius ? 'C' : 'F'}
+                    <button onClick={() => setIsCelsius(!isCelsius)}>
+                        Switch to °{isCelsius ? 'F' : 'C'}
+                    </button>
+                </p>
                 <p className='location'>{weatherData.location}</p>
                 <div className="col">
                     <img src={humidity_icon} alt="humidity" />
@@ -100,5 +139,4 @@ const Weather = () => {
         </div>
     )
 }
-
 export default Weather;
