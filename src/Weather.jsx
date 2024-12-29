@@ -3,7 +3,6 @@ import './Weather.css'
 const search_icon = '/assets/search.png';
 const clear_icon = '/assets/clear.png';
 const cloud_icon = '/assets/cloud.png';
-const drizzle_icon = '/assets/dizzle.png';
 const rain_icon = '/assets/rain.png';
 const snow_icon = '/assets/snow.png';
 const wind_icon = '/assets/wind.png';
