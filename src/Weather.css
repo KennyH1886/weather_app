@@ -91,6 +91,25 @@
     gap: 12px;
     font-size: 22px;
 }
+.weather-details {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.weather-details .detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.weather-details img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+}
 
 /* Weather data sub-text (e.g., humidity, wind speed) */
 .weather-data .col span {
